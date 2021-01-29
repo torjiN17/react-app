@@ -9,10 +9,24 @@ const Calculate: React.FC<any> = (props: any) => {
             <p className="text-right">ราคา {totalPrice } บาท</p>
             <hr /> 
             {
-                orders.map((order: any)=>{
+                orders && orders.map((order: any)=>{
                     console.log(order)
-                    return <p key={order.product.productId}>{order.product.productName} | {order.unitPrice} x {order.quantity} = {order.quantity*order.product.unitPrice}</p>
+                    return (
+                        <div>
+                            <ul className="list-inline">
+                                <li className="list-inline-item">
+                                <p key={order.product.productId}>{order.product.productName} | {order.unitPrice} x {order.quantity} = {order.quantity*order.product.unitPrice}</p>
+                                </li>
+                                <li className="list-inline-item float-right">
+                                <button className="btn btn-white btn-sm" onClick={()=> props.onDelOrder(order.product)}>X</button>
+                                </li>
+                            </ul>
+                        </div>
+                    )
                 })
+            }
+            {
+                (orders.length==0 ) && <p className="text-right">ไม่มีรายการสินค้า</p>
             }
             <hr />
             <div className="row">

@@ -16,6 +16,16 @@ const Moniter = () =>{
         const calTotalPrice: number = totalPrice + parseInt(product.unitPrice);
         addTotalPrice(calTotalPrice);
     }
+    const onDelOrder = (product: Product) => {
+        let findOrder = orders.find(order => order.product.productId == product.productId);
+        
+        if(findOrder){
+            let filterOrder = orders.filter(order => order.product.productId != product.productId);
+            addOrder(filterOrder)
+            const calTotalPrice: number = totalPrice - (findOrder?.quantity * parseInt(product.unitPrice));
+            addTotalPrice(calTotalPrice);
+        }
+    }
     
     const productList = [
         { productId: 1, productName: "สลัดผัก", unitPrice: "120", thumbnail: "/images/product/1.jpg" },
@@ -35,7 +45,7 @@ const Moniter = () =>{
                     <ProductList products={products}  onAddOrder={onAddOrder} />
                 </div>
                 <div className="col-md-3">
-                    <Calculate orders={orders} totalPrice={totalPrice} />
+                    <Calculate orders={orders} totalPrice={totalPrice} onDelOrder={onDelOrder} />
                 </div>
             </div>
             

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Moniter from './components/Moniter';
+import Home from './containers/Home'
+import { Route } from 'react-router-dom';
+import About from './containers/About';
 
 
  const App=()=> {
 
   return (
-    <div className="App container-fluid">
-      <Header />
-      <Moniter />
-      <Footer name="Torjin Sama"/>
+    <div className="App">
+      <Route exact path="/" component={Home} title={Home.title}/>
+      <Route path="/About" component={About} />
     </div>
   );
 }
